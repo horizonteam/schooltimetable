@@ -1,0 +1,7 @@
+add teacher course class
+
+constraints
+
+semesters
+
+course extend
