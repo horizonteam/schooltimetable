@@ -1,9 +1,8 @@
 package Model;
 
-import javax.swing.text.StringContent;
 
 
-public class Table {
+public class TableSlot {
 
 	private Model.Class mClass;
 	private Course mCourse;
@@ -11,7 +10,7 @@ public class Table {
 	private int time;
 	private String day;
 	
-	public Table(String d ,int t) {
+	public TableSlot(String d ,int t) {
 		this.day = d;
 		this.time = t;
 	}
@@ -30,6 +29,14 @@ public class Table {
 	
 	public Model.Class getmClass() {
 		return mClass;
+	}
+	
+	public Teacher getmTeacher() {
+		return mTeacher;
+	}
+	
+	public Course getmCourse() {
+		return mCourse;
 	}
 	
 	public String getDay() {
@@ -57,7 +64,7 @@ public class Table {
 	
 	public String toString2() {
 		
-		String text = String.valueOf(time)+":00 ";
+		String text = "";
 		
 		try {
 			text += mCourse.toString()+" "+mTeacher.toString();

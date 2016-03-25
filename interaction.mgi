@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ClassDiagram>
+    <CommunicationClass name="View.TeacherGUI" x="520" y="35">
+        <Communication destinationClassName="Controller.DatabaseConnectionController"/>
+    </CommunicationClass>
+    <CommunicationClass name="Model.Teacher" x="633" y="373"/>
+    <CommunicationClass name="Controller.AdminController" x="256" y="156">
+        <Association destinationClassName="Model.Class"
+            endpointName="classes" kind="Simple"/>
+        <Association destinationClassName="Model.Course"
+            endpointName="courses" kind="Simple"/>
+        <Association destinationClassName="Model.TableSlot"
+            endpointName="table" kind="Simple"/>
+        <Association destinationClassName="Model.Teacher"
+            endpointName="teachers" kind="Simple"/>
+        <Communication destinationClassName="Model.Teacher"/>
+        <Communication destinationClassName="Model.Class"/>
+        <Communication destinationClassName="Model.TableSlot"/>
+        <Communication destinationClassName="Model.Course"/>
+        <Communication destinationClassName="Controller.DatabaseConnectionController"/>
+    </CommunicationClass>
+    <CommunicationClass name="Model.Class" x="170" y="400"/>
+    <CommunicationClass name="View.AdminGUI" x="274" y="32">
+        <Communication destinationClassName="Controller.AdminController"/>
+    </CommunicationClass>
+    <CommunicationClass name="Model.TableSlot" x="385" y="355">
+        <Association destinationClassName="Model.Teacher"
+            endpointName="mTeacher" kind="Simple"/>
+        <Association destinationClassName="Model.Class"
+            endpointName="mClass" kind="Simple"/>
+        <Association destinationClassName="Model.Course"
+            endpointName="mCourse" kind="Simple"/>
+        <Communication destinationClassName="Model.Teacher"/>
+        <Communication destinationClassName="Model.Class"/>
+        <Communication destinationClassName="Model.Course"/>
+    </CommunicationClass>
+    <CommunicationClass name="Model.Course" x="342" y="475">
+        <Association destinationClassName="Model.Class"
+            endpointName="classroom" kind="Simple"/>
+        <Association destinationClassName="Model.Teacher"
+            endpointName="teacher" kind="Simple"/>
+        <Communication destinationClassName="Model.Teacher"/>
+    </CommunicationClass>
+    <CommunicationClass name="Controller.DatabaseConnectionController"
+        x="466" y="159"/>
+</ClassDiagram>

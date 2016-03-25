@@ -8,8 +8,8 @@ public class Class {
 	
 	public Class(String block, int number) {
 		
-		this.block_code = block;
-		this.classNumber = number;
+		this.setBlock_code(block);
+		this.setClassNumber(number);
 		
 		this.fullname = block + String.valueOf(number);
 	}
@@ -17,5 +17,29 @@ public class Class {
 	@Override
 	public String toString() {
 		return fullname;
+	}
+
+	public int getClassNumber() {
+		return classNumber;
+	}
+
+	public void setClassNumber(int classNumber) {
+		this.classNumber = classNumber;
+	}
+
+	public String getBlock_code() {
+		return block_code;
+	}
+
+	public void setBlock_code(String block_code) {
+		this.block_code = block_code;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

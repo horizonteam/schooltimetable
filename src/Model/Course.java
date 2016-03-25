@@ -10,8 +10,8 @@ public class Course {
 
 	public Course(String dept,int number,int hr) {
 		
-		this.department_code = dept;
-		this.courseNumber = number;
+		this.setDepartment_code(dept);
+		this.setCourseNumber(number);
 		this.hour=hr;
 		
 		this.fullname = dept +" "+number;
@@ -27,12 +27,12 @@ public class Course {
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
+		
 		return fullname;
 	}
 	
 	public String toString1() throws NullPointerException{
-		// TODO Auto-generated method stub
+		
 		return fullname+"/"+teacher.toString();
 	}
 
@@ -46,5 +46,21 @@ public class Course {
 	
 	public Class getClassroom() {
 		return classroom;
+	}
+
+	public int getCourseNumber() {
+		return courseNumber;
+	}
+
+	public void setCourseNumber(int courseNumber) {
+		this.courseNumber = courseNumber;
+	}
+
+	public String getDepartment_code() {
+		return department_code;
+	}
+
+	public void setDepartment_code(String department_code) {
+		this.department_code = department_code;
 	}
 }

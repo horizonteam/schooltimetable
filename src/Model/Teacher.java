@@ -7,15 +7,38 @@ public class Teacher {
 	private String fullname;
 	
 	public Teacher(String name,String lname) {
-		this.name = name;
-		this.lastname = lname;
+		this.setName(name);
+		this.setLastname(lname);
 		
 		this.fullname = name+" "+lname;
 	}
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return fullname;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

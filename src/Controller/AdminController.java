@@ -4,24 +4,29 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import Model.Course;
-import Model.Table;
+import Model.TableSlot;
 import Model.Teacher;
+import View.AdminMainUI;
 
-public class TimeTableController {
+public class AdminController {
 
 	ArrayList<Model.Class> classes = new ArrayList<Model.Class>();
 	ArrayList<Course> courses = new ArrayList<Course>();
 	ArrayList<Teacher> teachers = new ArrayList<Teacher>();
-	ArrayList<Table> table = new ArrayList<Table>();
+	ArrayList<TableSlot> table = new ArrayList<TableSlot>();
 	
-	public TimeTableController() {
-		fillLocalValues();
+	public AdminController() {
+		GetValuesFromDB();
 		matchTeacherToCourse();
 		matchClassToCourse();
 		matchTable();
+		
+		
+		//DatabaseConnectionController.insertTeacher(teachers.get(0));
+		
 	}
 		
-	public String[] getClasses() {
+	public String[] getClassNames() {
 		String[] s = new String[classes.size()];
 		
 		for (int i = 0; i < s.length; i++) {
@@ -31,7 +36,7 @@ public class TimeTableController {
 		return s;
 	}
 	
-	public String[] getTeachers() {
+	public String[] getTeacherNames() {
 		String[] s = new String[teachers.size()];
 		
 		for (int i = 0; i < s.length; i++) {
@@ -41,11 +46,11 @@ public class TimeTableController {
 		return s;
 	}
 	
-	public String[] getCourses() {
-		String[] s = new String[teachers.size()];
+	public String[] getCourseNames() {
+		String[] s = new String[courses.size()];
 		
 		for (int i = 0; i < s.length; i++) {
-			s[i] = teachers.get(i).toString();
+			s[i] = courses.get(i).toString();
 		}
 		
 		return s;
@@ -60,7 +65,51 @@ public class TimeTableController {
 				if (table.get(i).getmClass()==classes.get(index)) {
 					s[b][a] = table.get(i).toString2();
 				}else {
-					s[b][a] = "Empty";
+					s[b][a] = "-";
+				}
+				
+				if(b%8==0 && b!=0){
+					a=1+a;
+					b=-1;
+				}
+				b++;				
+		}
+		
+		return s;
+	}
+	
+	public String[][] getTableForTeacher(int index) {
+		String[][] s = new String[9][5];
+		int a=0,b=0;
+		
+		for (int i = 0; i < table.size(); i++) {
+				
+				if (table.get(i).getmTeacher()==teachers.get(index)) {
+					s[b][a] = table.get(i).toString2();
+				}else {
+					s[b][a] = "-";
+				}
+				
+				if(b%8==0 && b!=0){
+					a=1+a;
+					b=-1;
+				}
+				b++;				
+		}
+		
+		return s;
+	}
+
+	public String[][] getTableForCourse(int index) {
+		String[][] s = new String[9][5];
+		int a=0,b=0;
+		
+		for (int i = 0; i < table.size(); i++) {
+				
+				if (table.get(i).getmCourse()==courses.get(index)) {
+					s[b][a] = table.get(i).toString2();
+				}else {
+					s[b][a] = "-";
 				}
 				
 				if(b%8==0 && b!=0){
@@ -137,7 +186,7 @@ public class TimeTableController {
 	}
 	
 	
-	public void fillLocalValues() {
+	public void GetValuesFromDB() {
 		
 		for (int i = 0; i < 12 ; i++) {
 			classes.add(new Model.Class("DZ",101+i));
@@ -164,50 +213,52 @@ public class TimeTableController {
 		teachers.add(new Teacher("Necati Ercan","Özgencil"));
 		teachers.add(new Teacher("Tae-Cheon","Yang"));
 		
-		table.add(new Table("Pazartesi",9));
-		table.add(new Table("Pazartesi",10));
-		table.add(new Table("Pazartesi",11));
-		table.add(new Table("Pazartesi",12));
-		table.add(new Table("Pazartesi",13));
-		table.add(new Table("Pazartesi",14));
-		table.add(new Table("Pazartesi",15));
-		table.add(new Table("Pazartesi",16));
-		table.add(new Table("Pazartesi",17));
-		table.add(new Table("Salý",9));
-		table.add(new Table("Salý",10));
-		table.add(new Table("Salý",11));
-		table.add(new Table("Salý",12));
-		table.add(new Table("Salý",13));
-		table.add(new Table("Salý",14));
-		table.add(new Table("Salý",15));
-		table.add(new Table("Salý",16));
-		table.add(new Table("Salý",17));
-		table.add(new Table("Çarþamba",9));
-		table.add(new Table("Çarþamba",10));
-		table.add(new Table("Çarþamba",11));
-		table.add(new Table("Çarþamba",12));
-		table.add(new Table("Çarþamba",13));
-		table.add(new Table("Çarþamba",14));
-		table.add(new Table("Çarþamba",15));
-		table.add(new Table("Çarþamba",16));
-		table.add(new Table("Çarþamba",17));
-		table.add(new Table("Perþembe",9));
-		table.add(new Table("Perþembe",10));
-		table.add(new Table("Perþembe",11));
-		table.add(new Table("Perþembe",12));
-		table.add(new Table("Perþembe",13));
-		table.add(new Table("Perþembe",14));
-		table.add(new Table("Perþembe",15));
-		table.add(new Table("Perþembe",16));
-		table.add(new Table("Perþembe",17));
-		table.add(new Table("Cuma",9));
-		table.add(new Table("Cuma",10));
-		table.add(new Table("Cuma",11));
-		table.add(new Table("Cuma",12));
-		table.add(new Table("Cuma",13));
-		table.add(new Table("Cuma",14));
-		table.add(new Table("Cuma",15));
-		table.add(new Table("Cuma",16));
-		table.add(new Table("Cuma",17));
+		table.add(new TableSlot("Pazartesi",9));
+		table.add(new TableSlot("Pazartesi",10));
+		table.add(new TableSlot("Pazartesi",11));
+		table.add(new TableSlot("Pazartesi",12));
+		table.add(new TableSlot("Pazartesi",13));
+		table.add(new TableSlot("Pazartesi",14));
+		table.add(new TableSlot("Pazartesi",15));
+		table.add(new TableSlot("Pazartesi",16));
+		table.add(new TableSlot("Pazartesi",17));
+		table.add(new TableSlot("Salý",9));
+		table.add(new TableSlot("Salý",10));
+		table.add(new TableSlot("Salý",11));
+		table.add(new TableSlot("Salý",12));
+		table.add(new TableSlot("Salý",13));
+		table.add(new TableSlot("Salý",14));
+		table.add(new TableSlot("Salý",15));
+		table.add(new TableSlot("Salý",16));
+		table.add(new TableSlot("Salý",17));
+		table.add(new TableSlot("Çarþamba",9));
+		table.add(new TableSlot("Çarþamba",10));
+		table.add(new TableSlot("Çarþamba",11));
+		table.add(new TableSlot("Çarþamba",12));
+		table.add(new TableSlot("Çarþamba",13));
+		table.add(new TableSlot("Çarþamba",14));
+		table.add(new TableSlot("Çarþamba",15));
+		table.add(new TableSlot("Çarþamba",16));
+		table.add(new TableSlot("Çarþamba",17));
+		table.add(new TableSlot("Perþembe",9));
+		table.add(new TableSlot("Perþembe",10));
+		table.add(new TableSlot("Perþembe",11));
+		table.add(new TableSlot("Perþembe",12));
+		table.add(new TableSlot("Perþembe",13));
+		table.add(new TableSlot("Perþembe",14));
+		table.add(new TableSlot("Perþembe",15));
+		table.add(new TableSlot("Perþembe",16));
+		table.add(new TableSlot("Perþembe",17));
+		table.add(new TableSlot("Cuma",9));
+		table.add(new TableSlot("Cuma",10));
+		table.add(new TableSlot("Cuma",11));
+		table.add(new TableSlot("Cuma",12));
+		table.add(new TableSlot("Cuma",13));
+		table.add(new TableSlot("Cuma",14));
+		table.add(new TableSlot("Cuma",15));
+		table.add(new TableSlot("Cuma",16));
+		table.add(new TableSlot("Cuma",17));
 	}
+
+	
 }
