@@ -6,7 +6,6 @@ import java.util.Random;
 import Model.Course;
 import Model.TableSlot;
 import Model.Teacher;
-import View.AdminMainUI;
 
 public class AdminController {
 

@@ -27,7 +27,7 @@ public class TeacherUI extends JPanel {
 	JLayeredPane panel;
 	JLabel l1,l2,l3,l4;
 	JTextField tx1,tx2,tx3,t4;
-	JButton submit,reset,remove;
+	JButton submit,add,reset,remove;
 	JList<String> list;
 	
 	String full;
@@ -52,23 +52,25 @@ public class TeacherUI extends JPanel {
 		list.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		l1 = new JLabel("  Name");
-		l1.setBounds(250, 20, 150, 30);
+		l1.setBounds(270, 20, 150, 30);
 		l1.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1, true));
 		l2 = new JLabel("  Surname");
-		l2.setBounds(250, 60, 150, 30);
+		l2.setBounds(270, 60, 150, 30);
 		l2.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1, true));		
 		
 		tx1 = new JTextField();
-		tx1.setBounds(420, 20, 250, 30);
+		tx1.setBounds(440, 20, 250, 30);
 		tx2 = new JTextField();
-		tx2.setBounds(420, 60, 250, 30);
+		tx2.setBounds(440, 60, 250, 30);
 		
 		submit = new JButton("Save");
-		submit.setBounds(250, 100, 100, 30);
+		submit.setBounds(270, 255, 200, 30);
 		reset = new JButton("Clear");
-		reset.setBounds(370, 100, 100, 30);
+		reset.setBounds(490, 255, 200, 30);
 		remove = new JButton("Remove this Teacher!");
-		remove.setBounds(250, 350, 400, 30);
+		remove.setBounds(270, 350, 420, 30);
+		add = new JButton("Add new Teacher");
+		add.setBounds(270, 300, 420, 30);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			
@@ -117,6 +119,7 @@ public class TeacherUI extends JPanel {
 		panel.add(submit);
 		panel.add(reset);
 		panel.add(remove);
+		panel.add(add);
 		add(panel);
 		
 		setVisible(true);

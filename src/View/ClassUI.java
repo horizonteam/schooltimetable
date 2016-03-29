@@ -17,12 +17,13 @@ import javax.swing.event.ListSelectionListener;
 
 import Controller.AdminController;
 
+@SuppressWarnings("serial")
 public class ClassUI extends JPanel{
 
 	JLayeredPane panel;
 	JLabel l1,l2,l3,l4;
 	JTextField tx1,tx2,tx3,t4;
-	JButton submit,reset,remove;
+	JButton submit,reset,remove,add;
 	JList<String> list;
 	
 	String full,block,number;
@@ -35,7 +36,7 @@ public class ClassUI extends JPanel{
 		setBackground(Color.getHSBColor(210, 255, 190));
 		
 		panel = new JLayeredPane();
-		panel.setBorder(BorderFactory.createTitledBorder("Class"));
+		panel.setBorder(BorderFactory.createTitledBorder("Classroom"));
 		panel.setLayout(null);
 		setBorder(new EmptyBorder(20, 250, 20, 250));
 		
@@ -44,23 +45,25 @@ public class ClassUI extends JPanel{
 		list.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		
 		l1 = new JLabel("  Block Code");
-		l1.setBounds(250, 20, 150, 30);
+		l1.setBounds(270, 20, 150, 30);
 		l1.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1, true));
 		l2 = new JLabel("  Class Number");
-		l2.setBounds(250, 60, 150, 30);
+		l2.setBounds(270, 60, 150, 30);
 		l2.setBorder(BorderFactory.createLineBorder(Color.WHITE, 1, true));		
 		
 		tx1 = new JTextField();
-		tx1.setBounds(420, 20, 250, 30);
+		tx1.setBounds(440, 20, 250, 30);
 		tx2 = new JTextField();
-		tx2.setBounds(420, 60, 250, 30);
+		tx2.setBounds(440, 60, 250, 30);
 		
 		submit = new JButton("Save");
-		submit.setBounds(250, 100, 100, 30);
+		submit.setBounds(270, 255, 200, 30);
 		reset = new JButton("Clear");
-		reset.setBounds(370, 100, 100, 30);
-		remove = new JButton("Remove this Class!");
-		remove.setBounds(250, 350, 400, 30);
+		reset.setBounds(490, 255, 200, 30);
+		remove = new JButton("Remove this Classroom!");
+		remove.setBounds(270, 350, 420, 30);
+		add = new JButton("Add new Classroom");
+		add.setBounds(270, 300, 420, 30);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
 			
@@ -84,6 +87,7 @@ public class ClassUI extends JPanel{
 		panel.add(submit);
 		panel.add(reset);
 		panel.add(remove);
+		panel.add(add);
 		add(panel);
 		
 		setVisible(true);
