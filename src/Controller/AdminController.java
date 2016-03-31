@@ -6,7 +6,6 @@ import java.util.Random;
 import Model.Course;
 import Model.TableSlot;
 import Model.Teacher;
-import View.AdminMainUI;
 
 public class AdminController {
 
@@ -14,19 +13,16 @@ public class AdminController {
 	ArrayList<Course> courses = new ArrayList<Course>();
 	ArrayList<Teacher> teachers = new ArrayList<Teacher>();
 	ArrayList<TableSlot> table = new ArrayList<TableSlot>();
+	DatabaseController db;
 	
 	public AdminController() {
-		GetValuesFromDB();
-		matchTeacherToCourse();
-		matchClassToCourse();
-		matchTable();
-		
-		
-		//DatabaseConnectionController.insertTeacher(teachers.get(0));
+		db = new DatabaseController();
+		GetTableSlot();
 		
 	}
 		
 	public String[] getClassNames() {
+		classes = db.getClasses();
 		String[] s = new String[classes.size()];
 		
 		for (int i = 0; i < s.length; i++) {
@@ -37,6 +33,7 @@ public class AdminController {
 	}
 	
 	public String[] getTeacherNames() {
+		teachers = db.getTeacher();
 		String[] s = new String[teachers.size()];
 		
 		for (int i = 0; i < s.length; i++) {
@@ -47,6 +44,7 @@ public class AdminController {
 	}
 	
 	public String[] getCourseNames() {
+		courses = db.getCourse();
 		String[] s = new String[courses.size()];
 		
 		for (int i = 0; i < s.length; i++) {
@@ -123,6 +121,9 @@ public class AdminController {
 	}
 		
 	public void matchTable() {
+		matchTeacherToCourse();
+		matchClassToCourse();
+		
 		Random rd = new Random();
 		int b;
 		
@@ -186,32 +187,9 @@ public class AdminController {
 	}
 	
 	
-	public void GetValuesFromDB() {
+	public void GetTableSlot() {
 		
-		for (int i = 0; i < 12 ; i++) {
-			classes.add(new Model.Class("DZ",101+i));
-		}
 		
-		courses.add(new Course("COM",111,3));
-		courses.add(new Course("COM",101,3));
-		courses.add(new Course("MATH",101,3));
-		courses.add(new Course("PHY",101,3));
-		courses.add(new Course("ENGL",101,3));
-		courses.add(new Course("ATA",101,2));
-		courses.add(new Course("TDL",101,2));
-		courses.add(new Course("COM",201,3));
-		courses.add(new Course("COM",205,3));
-		courses.add(new Course("COM",251,3));
-		courses.add(new Course("COM",221,3));
-		courses.add(new Course("MATH",201,3));
-				
-		teachers.add(new Teacher("Haluk","Gümüþkaya"));
-		teachers.add(new Teacher("Hürevren","Kýlýç"));
-		teachers.add(new Teacher("Md.Haidar","Sherif"));
-		teachers.add(new Teacher("Yavuz","Ýnce"));
-		teachers.add(new Teacher("Gökhan","Akyol"));
-		teachers.add(new Teacher("Necati Ercan","Özgencil"));
-		teachers.add(new Teacher("Tae-Cheon","Yang"));
 		
 		table.add(new TableSlot("Pazartesi",9));
 		table.add(new TableSlot("Pazartesi",10));

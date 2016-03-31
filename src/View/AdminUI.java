@@ -9,7 +9,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 import Controller.AdminController;
-import Controller.DatabaseConnectionController;
+import Controller.DatabaseController;
 
 @SuppressWarnings("serial")
 public class AdminUI extends JFrame {
@@ -24,14 +24,14 @@ public class AdminUI extends JFrame {
 		setMenuBar(null);
 		
 		final AdminController ttc = new AdminController();
-		final DatabaseConnectionController db = new DatabaseConnectionController();
+		final DatabaseController db = new DatabaseController();
 		
 		root = new JTabbedPane();
 		root.setBackground(Color.WHITE);
 		root.addTab("Main", new AdminMainUI(ttc));
 		root.addTab("Teacher", new TeacherUI(ttc,db));
-		root.addTab("Course", new CourseUI(ttc));
-		root.addTab("Class", new ClassUI(ttc));
+		root.addTab("Course", new CourseUI(ttc,db));
+		root.addTab("Class", new ClassUI(ttc,db));
 		root.addTab("Schedule", new ScheduleUI(ttc));
 		add(root);	
 		

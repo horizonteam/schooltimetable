@@ -1,22 +1,18 @@
 package View;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import Controller.AdminController;
 
@@ -45,6 +41,14 @@ public class ScheduleUI extends JPanel {
 		l3 = new JLabel("Number of Class : "+ttc.getClassNames().length);
 		l4 = new JLabel("Check new Table in Main Tab after Schedule!");
 		submit = new JButton("Schedule");
+		
+		submit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ttc.matchTable();
+			}
+		});
 		
 		panel.add(l1);
 		panel.add(l2);

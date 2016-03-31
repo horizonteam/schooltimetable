@@ -2,7 +2,7 @@ package Model;
 public class Class {
 
 	private int id;
-	private String block_code;
+	private String blockCode;
 	private int classNumber;
 	private String fullname;
 	
@@ -28,11 +28,11 @@ public class Class {
 	}
 
 	public String getBlock_code() {
-		return block_code;
+		return blockCode;
 	}
 
 	public void setBlock_code(String block_code) {
-		this.block_code = block_code;
+		this.blockCode = block_code;
 	}
 
 	public int getId() {

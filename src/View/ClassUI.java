@@ -2,6 +2,8 @@ package View;
 
 import java.awt.Color;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -16,17 +18,20 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import Controller.AdminController;
+import Controller.DatabaseController;
+import Model.Class;
+import Model.Teacher;
 
 public class ClassUI extends JPanel{
 
 	JLayeredPane panel;
 	JLabel l1,l2,l3,l4;
 	JTextField tx1,tx2,tx3,t4;
-	JButton submit,reset,remove;
+	JButton add,submit,reset,remove;
 	JList<String> list;
 	
 	String full,block,number;
-	public ClassUI(AdminController ttc) {
+	public ClassUI(AdminController ttc,DatabaseController db) {
 		setBounds(new Rectangle(1270,480));
 		
 		//Panel oluþturma
@@ -55,6 +60,8 @@ public class ClassUI extends JPanel{
 		tx2 = new JTextField();
 		tx2.setBounds(420, 60, 250, 30);
 		
+		add = new JButton("Add new Classroom");
+		add.setBounds(250, 310, 400, 30);
 		submit = new JButton("Save");
 		submit.setBounds(250, 100, 100, 30);
 		reset = new JButton("Clear");
@@ -76,11 +83,47 @@ public class ClassUI extends JPanel{
 			}
 		});
 		
+		reset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				tx1.setText("");
+				tx2.setText("");
+			}
+		});
+		
+		submit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				//db.insertClass(item);
+			}
+		});
+		
+		add.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				db.insertClass(new Class(tx1.getText(),	Integer.parseInt(tx2.getText())));
+				list.setListData(ttc.getClassNames());
+			}
+		});
+		
+		remove.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				db.removeClass(new Class(tx1.getText(),	Integer.parseInt(tx2.getText())));
+				list.setListData(ttc.getClassNames());
+			}
+		});
+		
 		panel.add(list);
 		panel.add(l1);
 		panel.add(tx1);
 		panel.add(l2);
 		panel.add(tx2);
+		panel.add(add);
 		panel.add(submit);
 		panel.add(reset);
 		panel.add(remove);

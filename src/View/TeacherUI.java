@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -18,7 +19,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import Controller.AdminController;
-import Controller.DatabaseConnectionController;
+import Controller.DatabaseController;
 import Model.Teacher;
 
 @SuppressWarnings("serial")
@@ -27,12 +28,12 @@ public class TeacherUI extends JPanel {
 	JLayeredPane panel;
 	JLabel l1,l2,l3,l4;
 	JTextField tx1,tx2,tx3,t4;
-	JButton submit,reset,remove;
+	JButton add,submit,reset,remove;
 	JList<String> list;
 	
 	String full;
 	Teacher teacher;
-	public TeacherUI(AdminController ttc,DatabaseConnectionController db) {
+	public TeacherUI(AdminController ttc,DatabaseController db) {
 		setBounds(new Rectangle(1270,480));
 				
 		//Panel oluþturma
@@ -63,6 +64,8 @@ public class TeacherUI extends JPanel {
 		tx2 = new JTextField();
 		tx2.setBounds(420, 60, 250, 30);
 		
+		add = new JButton("Add new Teacher");
+		add.setBounds(250, 310, 400, 30);
 		submit = new JButton("Save");
 		submit.setBounds(250, 100, 100, 30);
 		reset = new JButton("Clear");
@@ -100,12 +103,29 @@ public class TeacherUI extends JPanel {
 			}
 		});
 		
+		add.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (tx1.getText().equals("") || tx2.getText().equals("") ) {
+					JOptionPane.showMessageDialog(null, "Please Fill All Blanks...");
+				} else {
+					db.insertTeacher(new Teacher(tx1.getText(), tx2.getText()));
+					list.setListData(ttc.getTeacherNames());
+				}
+			}
+		});
+		
 		remove.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				// TODO remove teacher
-				
+				if (tx1.getText().equals("") || tx2.getText().equals("") ) {
+					JOptionPane.showMessageDialog(null, "Please Fill All Blanks...");
+				} else {
+					db.removeTeacher(new Teacher(tx1.getText(), tx2.getText()));
+					list.setListData(ttc.getTeacherNames());
+				}
 			}
 		});
 		
@@ -114,6 +134,7 @@ public class TeacherUI extends JPanel {
 		panel.add(tx1);
 		panel.add(l2);
 		panel.add(tx2);
+		panel.add(add);
 		panel.add(submit);
 		panel.add(reset);
 		panel.add(remove);
@@ -121,6 +142,5 @@ public class TeacherUI extends JPanel {
 		
 		setVisible(true);
 	}
-	
 	
 }

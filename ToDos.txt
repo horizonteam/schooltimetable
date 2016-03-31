@@ -1,7 +1,4 @@
-add teacher course class
 
-constraints
+constraints -- teacher days hours
 
-semesters
-
-course extend
+semester
