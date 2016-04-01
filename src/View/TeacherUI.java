@@ -76,13 +76,15 @@ public class TeacherUI extends JPanel {
 		list.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
+			public void valueChanged(ListSelectionEvent e){
+				if (e.getValueIsAdjusting()) {
 				full = list.getSelectedValue();
 				teacher.setName(full.split(" ")[0]);
 				teacher.setLastname(full.split(" ")[1]);
 				
 				tx1.setText(teacher.getName());
 				tx2.setText(teacher.getLastname());
+				}else{}
 			}
 		});
 		

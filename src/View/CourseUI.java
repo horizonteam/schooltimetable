@@ -78,13 +78,15 @@ public class CourseUI extends JPanel {
 		list.addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
 				full = list.getSelectedValue();
 				department = full.split(" ")[0];
 				code = full.split(" ")[1];
 				
 				tx1.setText(department);
 				tx2.setText(code);
+				}else{}
 			}
 		});
 		

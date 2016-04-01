@@ -70,16 +70,17 @@ public class ClassUI extends JPanel{
 		remove.setBounds(250, 350, 400, 30);
 		
 		list.addListSelectionListener(new ListSelectionListener() {
-			
 			@Override
-			public void valueChanged(ListSelectionEvent arg0) {
-				full = list.getSelectedValue();
-				
-				number = full.substring(2);
-				block = full.substring(0, 2);
-				
-				tx1.setText(block);
-				tx2.setText(number);
+			public void valueChanged(ListSelectionEvent e) {
+				if (e.getValueIsAdjusting()) {
+					full = list.getSelectedValue();
+					
+					number = full.substring(2);
+					block = full.substring(0, 2);
+					
+					tx1.setText(block);
+					tx2.setText(number);
+				}else { }
 			}
 		});
 		
@@ -115,6 +116,8 @@ public class ClassUI extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				db.removeClass(new Class(tx1.getText(),	Integer.parseInt(tx2.getText())));
 				list.setListData(ttc.getClassNames());
+				repaint();
+				revalidate();
 			}
 		});
 		

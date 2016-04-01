@@ -80,7 +80,7 @@ public class DatabaseController {
 		    rs=st.getResultSet();
 		    
 			while(rs.next()){
-				list.add(new Model.Class(rs.getString("block_code"), rs.getInt("number")));
+				list.add(new Model.Class(rs.getString("block_code"), rs.getInt("block_number")));
 				//System.out.println(rs.getInt("id")+" "+rs.getString("name")+" "+rs.getString("surname")); 
 			}
 			rs.close();
@@ -108,7 +108,7 @@ public class DatabaseController {
 		    rs=st.getResultSet();
 		    
 			while(rs.next()){
-				list.add(new Course(rs.getString("department"), rs.getInt("number"), rs.getInt("hour")));
+				list.add(new Course(rs.getString("department"), rs.getInt("dept_number"), rs.getInt("hour")));
 				//System.out.println(rs.getInt("id")+" "+rs.getString("name")+" "+rs.getString("surname")); 
 			}
 			rs.close();
@@ -129,7 +129,7 @@ public class DatabaseController {
             Connection con = baglan(); // baðlantý fonksiyonumuzla baðlantý kuruldu...
             st = con.createStatement();
             
-            st.execute("insert into Teacher values(null,'"+item.getName()+"','"+item.getLastname()+"')");
+            st.execute("insert into Teacher (name,surname) values('"+item.getName()+"','"+item.getLastname()+"')");
 			
         	st.close();
 			con.close();
@@ -146,7 +146,7 @@ public class DatabaseController {
             Connection con = baglan(); // baðlantý fonksiyonumuzla baðlantý kuruldu...
             st = con.createStatement();
             
-            st.execute("insert into Course values(null,'"+item.getDepartment_code()+"','"
+            st.execute("insert into Course (department,dept_number,hour) values('"+item.getDepartment_code()+"','"
             		+item.getCourseNumber()+"','"+item.getHour()+"')");
 			
         	st.close();
@@ -164,7 +164,7 @@ public class DatabaseController {
             Connection con = baglan(); // baðlantý fonksiyonumuzla baðlantý kuruldu...
             st = con.createStatement();
             
-            st.execute("insert into Class values(null,'"+item.getBlock_code()+"','"+item.getClassNumber()+"')");
+            st.execute("insert into Class (block_code,block_number) values('"+item.getBlock_code()+"','"+item.getClassNumber()+"')");
 			
         	st.close();
 			con.close();
@@ -198,7 +198,7 @@ public class DatabaseController {
             Connection con = baglan(); // baðlantý fonksiyonumuzla baðlantý kuruldu...
             st = con.createStatement();
             
-            st.execute("DELETE FROM Class WHERE block_code='"+item.getBlock_code()+"' and number='"+item.getClassNumber()+"' ;");
+            st.execute("DELETE FROM Class WHERE block_code='"+item.getBlock_code()+"' and block_number='"+item.getClassNumber()+"' ;");
 			
         	st.close();
 			con.close();
@@ -215,7 +215,7 @@ public class DatabaseController {
             Connection con = baglan(); // baðlantý fonksiyonumuzla baðlantý kuruldu...
             st = con.createStatement();
             
-           st.execute("DELETE FROM Course WHERE department='"+item.getDepartment_code()+"' and number='"+item.getCourseNumber()+"' ;");
+           st.execute("DELETE FROM Course WHERE department='"+item.getDepartment_code()+"' and dept_number='"+item.getCourseNumber()+"' ;");
 			
         	st.close();
 			con.close();
